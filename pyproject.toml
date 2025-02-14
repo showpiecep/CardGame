@@ -11,6 +11,8 @@ gymnasium = {extras = ["other"], version = "^1.0.0"}
 pygame = "^2.6.1"
 transformers = "^4.48.3"
 torch = "^2.6.0"
+fastapi = "^0.115.8"
+uvicorn = "^0.34.0"
 
 
 [tool.poetry.group.dev.dependencies]
