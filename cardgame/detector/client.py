@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import datetime
+from dataclasses import dataclass
 from typing import Optional
 
 import numpy as np
@@ -14,6 +14,13 @@ from cardgame.detector.utils.result import DetectionResult
 class DetectorClientResponse:
     annotated_data: Image.Image
     detections: list[DetectionResult]
+
+    @property
+    def sorted_bboxes(self):
+        return sorted(
+            self.detections,
+            key=lambda item: (item.box.xmin**2 + item.box.ymin**2),
+        )
 
 
 class DetectorClient:
@@ -53,9 +60,9 @@ if __name__ == "__main__":
     image = Image.open(
         requests.get("https://www.pagat.com/images/beating/durak.jpg", stream=True).raw
     ).convert("RGB")
-    start = datetime.now()
+    start = datetime.datetime.now()
     tmp = DetectorClient().predict(image)
-    elapsed = datetime.now() - start
+    elapsed = datetime.datetime.now() - start
 
     seconds = elapsed.total_seconds()
     print(f"Execution time: {seconds:.4f} seconds")

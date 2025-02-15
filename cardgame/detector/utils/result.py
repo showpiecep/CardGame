@@ -15,6 +15,10 @@ class BoundingBox:
     def xyxy(self) -> List[float]:
         return [self.xmin, self.ymin, self.xmax, self.ymax]
 
+    @property
+    def xyxy2plot(self) -> tuple[tuple[float]]:
+        return ((self.xmin, self.ymin), (self.xmax, self.ymax))
+
 
 @dataclass
 class DetectionResult:
